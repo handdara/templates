@@ -1,0 +1,120 @@
+\ProvidesPackage{handdara}
+
+% Use packages
+\usepackage{graphicx} % include images
+\usepackage{float} % enforce figure placement
+\usepackage{amsmath} % for * math envs.
+\usepackage{amssymb} % for math symbols
+\usepackage{amsthm} % for more theorem envs
+\usepackage{booktabs} % fancy matrices
+\usepackage{fancyvrb} % Verbatim env
+\usepackage{ifthen} % used for conditional including
+\usepackage{nomencl} % used for making a nomenclature, TODO: create `makeindex` helix hotkey
+\usepackage{mathtools}
+
+% FONT SPECIFICATIONS
+% `-> Uncomment this to change to a sans serif font
+\DeclareOption{sans}{\newcommand{\SANS}{}}
+\DeclareOption{beamer}{\newcommand{\BEAMER}{}}
+\ProcessOptions\relax
+
+\ifdefined\SANS
+	\usepackage{helvet}
+	\renewcommand{\familydefault}{\sfdefault}
+	\usepackage[cmbright]{sfmath}
+	\usepackage{bbold} % sans-serif \mathbb{} environment
+\else
+	\usepackage{bbm} % \mathbbm{} environment
+\fi
+% END FONT
+
+\ifdefined\BEAMER
+\else
+	\newtheorem{thm}{Theorem}[section]
+	\newtheorem{corollary}{Corollary}[thm]
+	\newtheorem{lemma}[thm]{Lemma}
+	\newtheorem{prop}[thm]{Proposition}
+	\newtheorem*{prop*}{Proposition}
+
+	\theoremstyle{definition}
+	\newtheorem{defn}[thm]{Definition}
+	\newtheorem*{defn*}{Definition}
+
+	\theoremstyle{remark}
+	\newtheorem{note}[thm]{Note}
+	\newtheorem{remk}[thm]{Remark}
+	\newtheorem{exmp}[thm]{Example}
+	\newtheorem*{note*}{Note}
+	\newtheorem*{remk*}{Remark}
+	\newtheorem*{exmp*}{Example}
+\fi
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+% # MATH CMDS
+% ## Linear Algebra
+\newcommand{\bv}[1]{\mathbf{#1}} % Bold vector
+\newcommand{\dv}[1]{\dot{\mathbf{#1}}}
+\newcommand{\ddv}[1]{\ddot{\mathbf{#1}}}
+\newcommand{\rvec}[1]{\underline{\mathbf{#1}}} % Random vector
+\newcommand{\mat}[1]{\mathrm{#1}}
+\newcommand{\inner}[2]{\langle#1,#2\rangle}
+\newcommand{\spec}[1]{\mathrm{spec\left(#1\right)}}
+\renewcommand{\span}[1]{{\mathrm{span}\left(#1\right)}}
+\newcommand{\eigvec}[2]{{\mathrm{eigvec}_{#1}\left(#2\right)}}
+\newcommand{\im}[1]{{\mathrm{im}\left(#1\right)}}
+
+% ## Abstract Algebra / Category Theory
+\newcommand{\enring}[1]{{\mathrm{End}\left(#1\right)}}
+
+% ## Calculus
+\newcommand{\df}[1]{\mathrm{d}#1}
+\newcommand{\ddt}[1]{\frac{\mathrm{d}#1}{\mathrm{dt}}} % d/dt
+\newcommand{\dds}[1]{\frac{\mathrm{d}#1}{\mathrm{ds}}} % d/ds
+\newcommand{\diag}[3]{\begin{pmatrix}  #1 & 0 & 0 \\  0 & #2 & 0 \\  0 & 0 & #3 \end{pmatrix}} % quickly make a diagonal 3x3 matrix
+\newcommand{\unhat}[1]{\left(#1\right)^{\vee}} % Unhat what's in parens.
+\newcommand{\quat}[1]{\bar{\mathbf{#1}}} % quaternion
+
+% ## Probability / Info. Theory
+\newcommand{\prob}[1]{Pr\left(#1\right)}
+\newcommand{\rv}[1]{\underline{#1}} % random variable
+\newcommand{\expval}[1]{\mathbb{E} \left( #1 \right)} % expected value
+\newcommand{\expvals}[2]{\mathbb{E}_{#1} \left( #2 \right)}
+\newcommand{\entropy}[1]{\mathbb{H} \left( #1 \right)} % Shannon entropy
+\newcommand{\binentropy}[1]{\mathbb{H}_b \left( #1 \right)} % Binary entropy
+\newcommand{\fdivergence}[2]{\mathbb{D}_f \left( #1 \middle|\middle| #2\right)} % f-divergence
+\newcommand{\relentropy}[2]{\mathbb{D} \left( #1 \middle|\middle| #2\right)} % relative entropy
+\newcommand{\mutinfo}[2]{\mathbb{I}\left(#1;#2\right)}
+\newcommand{\condmutinfo}[3]{\mathbb{I}\left(#1;#2\middle|#3\right)}
+\newcommand{\totalvariation}[2]{\mathbb{V} \left( #1, #2 \right)} % Total variation 
+
+% # Generic Symbols & cmds
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\comps}{\mathbb{C}}
+\ifdefined\SANS
+	\newcommand{\one}{\mathbb{1}}
+\else
+	\newcommand{\one}{\mathbbm{1}}
+
+\fi
+\newcommand{\rthree}{\mathbb{R}^3}
+\newcommand{\fI}{\mathcal{I}}
+\newcommand{\fB}{\mathcal{B}}
+\newcommand{\ftsoc}{for the sake of contradiction }
+\newcommand{\overeq}[1]{
+	\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny #1}}}{=}}
+}
+\newcommand{\overlt}[1]{
+	\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny #1}}}{<}}
+}
+\newcommand{\overleq}[1]{
+	\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny #1}}}{\leq}}
+}
+\newcommand{\overgt}[1]{
+	\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny #1}}}{>}}
+}
+\newcommand{\overgeq}[1]{
+	\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny #1}}}{\geq}}
+}
+\newcommand{\set}[1]{\left\{ {#1} \right\}}

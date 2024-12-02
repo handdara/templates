@@ -1,0 +1,180 @@
+\documentclass[11pt]{article}
+
+% ========================= FORMATTING CONTROL STATEMENTS =========================
+\newcommand{\showproofs}{1} % 1 for true, 0 for false
+\newcommand{\showexamples}{1}
+\newcommand*{\SANS}{} % Comment to use a serif font
+% =================================================================================
+
+\input{{../generic_preamble.tex}}
+
+%opening
+\title{Generic Math Document Template}
+\author{Nicholas Brittain}
+% \date{}
+
+\begin{document}
+	
+\maketitle
+
+% # Nomenclaure
+% ## Commands specific to this document
+\newcommand{\xalph}{\mathcal{X}}
+\newcommand{\yalph}{\mathcal{Y}}
+\newcommand{\zalph}{\mathcal{Z}}
+\newcommand{\xsimp}{\Delta(\xalph)}
+\newcommand{\ysimp}{\Delta(\yalph)}
+\newcommand{\zsimp}{\Delta(\zalph)}
+\newcommand{\letxbeadrv}{Let $\rv x$ be a DRV with alphabet $\xalph$.}
+
+\makenomenclature % tells compiler to open %DOCFILE$.nlo
+\nomenclature{$\bv x$}{Vector}
+\nomenclature{$\mat{A}$}{Matrices are capital without italics.}
+\nomenclature{$\rv X, \rv x$}{Random variables}
+\nomenclature{$\rvec x$}{Random vector}
+\nomenclature{$\expval{\cdot}$}{Expected value of some random variable}
+\nomenclature{$\Delta (\mathcal{X})$}{Probability simplex on alphabet }
+\printnomenclature
+
+\section{Probability \& Stochastic Processes}
+
+\begin{defn}
+  Let $\rv x$ be a discrete random variable (DRV) with alphabet $\mathcal{X}$. The \emph{probability simplex} is defined as $\Delta (\xalph) \triangleq \left\{\bv p_x \in [0,1]^{|\xalph|} : \sum_{x\in\xalph} = 1 \right\}$, and is the set of all distributions on $\xalph$.
+\end{defn}
+
+\begin{defn}
+  Let $P,Q\in\Delta(\xalph)$. Then, $P$ is \emph{absolutely continuous} wrt $Q$, denoted $P\ll Q$, if $\mathrm{supp}\,P \subseteq \mathrm{supp}\,Q$.
+\end{defn}
+
+
+\subsection{Expected Values}
+
+\begin{defn}
+  \letxbeadrv The \emph{m\textsuperscript{th}-moment} of $\rv x$ is $\expval{\rv x^m}$ .
+\end{defn}
+
+\begin{lemma}\label{lem:iterated_law_of_expvals} Iterated law of expectations.
+  Let $\rv x, \rv y$ be RVs. Let $f:\reals^2 \rightarrow \reals$. Then,
+  \begin{equation}
+    \expvals{XY}{f(\rv x, \rv y)} = \expvals{Y}{\expvals{X|Y}{f(\rv x, \rv y) | \rv y}}
+  \end{equation}
+\end{lemma}
+
+\subsection{Tail Inequalities}
+
+\begin{defn}
+  Let $\rv x$ be a RV. Then a \emph{tail inequality} is a bound of the form $P(\rv x \geq t) \leq f(t)$ for $t\in\reals,\, f:\reals\rightarrow\reals_+$.
+\end{defn}
+
+\begin{lemma}\label{lemma:tail}
+  Let $\rv x \in \reals_+$ be a RV. Then,
+  \begin{equation}
+    P(\rv x \geq t) \leq \frac{\expval{\rv x}}{t}, \hspace{1em} \forall t>0
+  \end{equation}
+\end{lemma}
+
+\begin{lemma}\label{lemma:tail_phi}
+  Let $\rv x$ be a real-valued RV. Let the function $\phi:\xalph\rightarrow\reals_+$ be non decreasing on $\xalph$ and $\expval{|\phi(\rv x)|}<\infty$. Then,
+  \begin{equation}
+    \boxed{
+      P(\rv x \geq t) \leq \frac{\expval{\phi(\rv x)}}{\phi(t)}
+    }
+  \end{equation}
+\end{lemma}
+% \ifthenelse{\equal{\showproofs}{1}}{
+\begin{proof}
+  We have,
+  \begin{equation*}\begin{aligned}
+    P(\rv x \geq t) &= \expval{\one(\rv x \geq t)} \\
+      &= \expval{\one(\rv x \geq t)\one(\phi(\rv x) \geq \phi(t))}\\
+      &\leq \expval{\one(\phi(\rv x) \geq \phi(t))}\\
+      &= P(\phi(\rv x) \geq \phi(t))\\
+      &\leq \frac{\expval{\phi(\rv x)}}{\phi(t)},
+  \end{aligned}\end{equation*}
+  using Lemma \ref{lemma:tail} for the last step.
+\end{proof}
+% }{}
+
+\begin{thm} Hoeffding's inequality.
+  Let $\{\rv x_i\}_{i=1}^n$ be a set of independent RVs s.t. \\$\forall i, P(\rv x \in [a_i,b_i]) = 1$, i.e. $\mathrm{supp}(\rv x_i) \subseteq [a_i, b_i]$. Then, letting $\rv y := \sum_{i=1}^{n} \rv x_i$
+  \begin{equation}
+    P\left(\rv y - \expval{\rv y} \geq t \right) \leq \exp\left(-\frac{2t^2}{\sum_{i=1}^{n}(b_i - a_i)^2}\right)\,\,\, 
+  \end{equation}
+  and
+  \begin{equation}
+    P\left(\left|\rv y - \expval{\rv y}\right| \geq t \right) \leq 2\exp\left(-\frac{2t^2}{\sum_{i=1}^{n}(b_i - a_i)^2}\right)\,\,\, 
+  \end{equation}
+  for all $t>0$.
+\end{thm}
+
+\ifthenelse{\equal{\showexamples}{1}}{
+\begin{exmp}
+  Hoeffding's inequality shows that if $\rv x\sim \mathrm{Binomial}(p,n)$, then
+  \begin{equation*}
+    P(\rv x - \mu_x \geq t) = P(\rv x - np \geq t) \leq \exp\left(-\frac{2t^2}{n}\right)
+  \end{equation*}
+  and letting $t = (k-1)np$ where $k>1$ is some positive constant
+  \begin{equation*}\begin{aligned}
+    P(\rv x \geq np + t) &\leq \exp\left(-\frac{2t^2}{n}\right) \\
+    P(\rv x \geq k\mu_x) &\leq \exp\left(-\frac{2p^2n^2(k-1)^2}{n}\right) \\
+      &= \exp\left(-2p^2n(k-1)^2\right) 
+  \end{aligned}\end{equation*}
+  So we could say for a fair coin flipped 100 times, the probability of getting more than 50 heads is less than 1, which is trivial. But the probability of getting 60 or more heads is now 0.1353$\dots$, the probability of getting 65 or more heads is around 1\%, and by the time you get to 75 the probability is bounded by 0.000373\% ! Furthermore, as might be expected, as you approach the limit of $n\to\infty$, the probability of you doing any better than the mean vanishes.
+\end{exmp}
+}{}
+
+\subsection{Convexity \& Jensen's Inequality}
+\begin{defn}
+  A function $f$ is \emph{convex} if $\forall \lambda\in[0,1]$,
+  \begin{equation*}
+    f(\lambda a + (1-\lambda)b) \leq \lambda f(a) + (1-\lambda) f(b).
+  \end{equation*}
+  It is \emph{strictly} convex if the previous inequality is strict. A function $f$ is \emph{(strictly) concave} if $-f$ is (strictly) convex.
+\end{defn}
+
+\begin{thm} Jensen's inequality. 
+  Let $\rv x$ be a real RV with support $[a,b]$. Let $f:[a,b]\rightarrow\reals$ be convex on $[a,b]$. Then,
+  \begin{equation}
+    f(\expval{\rv x}) \leq \expval{f(\rv x)}
+  \end{equation}
+  Furthermore, if $f$ is \emph{strictly} convex, then equality holds iff $\rv x$ is constant.
+\end{thm}
+
+\begin{lemma} Log-sum inequality. 
+  Let $\{a_i\}_{i=1}^n \in \reals_+^n$ and $\{b_i\}_{i=1}^n \in \reals_+^n$. Then,
+  \begin{equation}
+    \sum_{i=1}^{n} a_i \ln \frac{a_i}{b_i} \geq \left(\sum_{i=1}^{n} a_i\right)
+      \ln \frac{\sum_{i=1}^{n} a_i}{\sum_{i=1}^{n} b_i}
+  \end{equation}
+\end{lemma}
+
+\newpage
+\appendix
+
+\section{Summary of Important Metrics}
+\begin{equation*}
+  \begin{aligned}
+    \fdivergence{P}{Q} &\triangleq \sum_{x\in\xalph} Q(x)f\left(\frac{P(x)}{Q(x)}\right)\\
+      &= \expvals{\rv x\sim Q}{f\left(\frac{P(x)}{Q(x)}\right)}\\ 
+    \\
+    \mathbb{V}(P,Q) &\triangleq \frac{1}{2} ||P-Q||_1 \\
+      &= \frac{1}{2}\fdivergence{P}{Q} \hspace{1.5em} \mathrm{where} \,\ f(x) = |t-1|\\
+    \\
+    \relentropy{P}{Q} &\triangleq \sum_{x\in\xalph}P(x)\ln\frac{P(x)}{Q(x)} \\
+      &= \fdivergence{P}{Q} \hspace{1.5em} \mathrm{where} \, f(x) = x \ln x \\
+    \\
+    \entropy{\rv x} &\triangleq \expvals{X}{-\log_2 P_X(x)} \\
+      &= -\sum_{x\in\xalph} P_X(x) \log_2 P_X(x) \\
+    \\
+    \entropy{\rv x, \rv y} &\triangleq \expvals{XY}{-log_2 P_{XY}(\rv x, \rv y)} \\ 
+    \\
+    \entropy{\rv y | \rv x} &\triangleq \expvals{XY}{-log_2 P_{Y|X}(\rv y | \rv x)} \\
+      &= - \sum_{x\in\xalph}\sum_{y\in\yalph}P_{XY}(x,y)log_2 P_{Y|X}(y|x)\\
+    \\
+    \mutinfo{\rv x}{\rv y} &\triangleq \entropy{\rv x} - \entropy{\rv x|\rv y} \\
+      &= \relentropy{P_{XY}}{P_X P_Y} \\
+      &= \mutinfo{\rv y}{\rv x}\\
+  \end{aligned}
+\end{equation*}
+
+\end{document}
