@@ -35,8 +35,8 @@
                         '';
                     installPhase = ''
                         mkdir -p $out
-                        cp ${texRoot}.pdf $out
-                        cp ${texRoot}.synctex.gz $out
+                        cp ${texRoot}.pdf $out/built.pdf
+                        cp ${texRoot}.synctex.gz $out/built.synctex.gz
                         '';
                 };
             });

@@ -1,0 +1,8 @@
+jd := justfile_directory()
+pdf_out := jd / "result" / "built.pdf"
+
+watch:
+    nix-shell -p watchexec --command "watchexec -e tex -- nix build"
+
+open-pdf:
+    nix develop --command bash -c "okular {{pdf_out}}"

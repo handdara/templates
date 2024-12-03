@@ -23,3 +23,6 @@ _test_tex_env:
     cd $testd
     nix flake init -t {{tempd}}#tex
     export TESTD=$testd
+
+edit:
+    nvim
