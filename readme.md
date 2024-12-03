@@ -1,5 +1,5 @@
 # templates
 
-ppersonal use nix templatesersonal use nix templates
+personal use nix templates
 
 - `tex`

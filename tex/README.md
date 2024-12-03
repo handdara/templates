@@ -1,6 +1,6 @@
-# LaTeX template
+# handdara LaTeX template
 
-A LaTeX template for scientific writing, with a focus on reproducibility and ease of use.
+Simple LaTeX template.
 
 ## Usage instructions
 
@@ -32,3 +32,8 @@ If you know you won't need all the LaTeX packages included with TeX Live, you ca
 ```
 
 However, by doing this you'll need to find the corresponding Nix package in the `nixpkgs` repository, and add it to the environment manually whenever you want to include a new LaTeX package. For this reason, it can be easier during writing to just use `texliveFull` unless you have a specific need not to.
+
+---
+
+Credit to the [NixOS Templates Repository](https://github.com/NixOS/templates ) from which I pulled
+the initial bones of this flake and most of this readme's text.
