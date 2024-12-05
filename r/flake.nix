@@ -11,10 +11,10 @@
                 nativeBuildInputs = with pkgs; [
                     rstudio
                     just
+                    rPackages.languageserver
                 ];
                 buildInputs = with pkgs; [
                     R 
-                    rPackages.languageserver
                 ];
             };
         });
