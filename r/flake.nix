@@ -14,7 +14,7 @@
                 ];
                 buildInputs = with pkgs; [
                     R 
-                    # rPackages.pagedown
+                    rPackages.languageserver
                 ];
             };
         });
