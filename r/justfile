@@ -1,0 +1,13 @@
+jd := justfile_directory()
+
+# list recipes
+default:
+    @just --list
+
+# drop into dev shell
+develop:
+    nix develop
+
+# drop into dev shell and launch neovim
+edit:
+    nix develop --command bash -c "nvim"

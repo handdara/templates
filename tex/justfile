@@ -1,8 +1,26 @@
 jd := justfile_directory()
-pdf_out := jd / "result" / "built.pdf"
+pdf_name := "built.pdf"
+pdf_result := jd / "result" / pdf_name
+pdf_out := jd / pdf_name
 
+# list recipes
+default:
+    @just --list
+
+# watch for changes in latex files and rebuild on detection
 watch:
-    nix-shell -p watchexec --command "watchexec -e tex -- nix build"
+    nix-shell -p watchexec --command "watchexec --poll 20s -e tex,sty -- just build"
 
+# build pdf
+build:
+    git add .
+    nix build
+    cp -f {{pdf_result}} {{pdf_out}}
+
+# open built pdf
 open-pdf:
     nix develop --command bash -c "okular {{pdf_out}}"
+
+# drop into dev shell and launch neovim
+edit:
+    nix develop --command bash -c "nvim"

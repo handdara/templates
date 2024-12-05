@@ -1,6 +1,6 @@
 tempd := justfile_directory()
 
-runtests: _test_tex
+runtests: _test_r_env
 
 _test_tex:
     #!/usr/bin/env bash
@@ -22,6 +22,14 @@ _test_tex_env:
     testd=$(mktemp -d)
     cd $testd
     nix flake init -t {{tempd}}#tex
+    export TESTD=$testd
+
+_test_r_env:
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    testd=$(mktemp -d)
+    cd $testd
+    nix flake init -t {{tempd}}#R
     export TESTD=$testd
 
 edit:

@@ -6,6 +6,10 @@
                 path = ./tex;
                 description = "simple flake template for writing latex";
             };
+            R = {
+                path = ./r;
+                description = "simple flake template for R";
+            };
         };
     };
 }
