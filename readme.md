@@ -2,5 +2,13 @@
 
 personal use nix flake templates
 
-- `tex`
-- `R`
+-   `tex`
+    init command:
+    ```bash
+    nix flake init -t {{tempd}}#tex
+    ```
+-   `R`
+    init command:
+    ```bash
+    nix flake init -t {{tempd}}#R
+    ```
