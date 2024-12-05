@@ -1,6 +1,6 @@
 jd := justfile_directory()
-pdf_name := "built.pdf"
-pdf_result := jd / "result" / pdf_name
+pdf_name := "output.pdf"
+pdf_result := jd / "result/built.pdf"
 pdf_out := jd / pdf_name
 
 # list recipes

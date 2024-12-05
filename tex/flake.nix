@@ -17,6 +17,7 @@
                 nativeBuildInputs = with pkgs; [
                     just
                     okular
+                    texlab
                 ];
             in {
                 packages.default = pkgs.stdenv.mkDerivation {
