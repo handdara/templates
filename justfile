@@ -31,6 +31,7 @@ _test_r_env:
     cd $testd
     nix flake init -t {{tempd}}#R
     export TESTD=$testd
+    just run
 
 edit:
     nvim
