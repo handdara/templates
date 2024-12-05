@@ -30,20 +30,20 @@
 
 \ifdefined\BEAMER
 \else
-	\newtheorem{thm}{Theorem}[section]
-	\newtheorem{corollary}{Corollary}[thm]
-	\newtheorem{lemma}[thm]{Lemma}
-	\newtheorem{prop}[thm]{Proposition}
+	\newtheorem{theorem}{Theorem}[section]
+	\newtheorem{corollary}{Corollary}[theorem]
+	\newtheorem{lemma}[theorem]{Lemma}
+	\newtheorem{prop}[theorem]{Proposition}
 	\newtheorem*{prop*}{Proposition}
 
 	\theoremstyle{definition}
-	\newtheorem{defn}[thm]{Definition}
+	\newtheorem{defn}[theorem]{Definition}
 	\newtheorem*{defn*}{Definition}
 
 	\theoremstyle{remark}
-	\newtheorem{note}[thm]{Note}
-	\newtheorem{remk}[thm]{Remark}
-	\newtheorem{exmp}[thm]{Example}
+	\newtheorem{note}[theorem]{Note}
+	\newtheorem{remk}[theorem]{Remark}
+	\newtheorem{exmp}[theorem]{Example}
 	\newtheorem*{note*}{Note}
 	\newtheorem*{remk*}{Remark}
 	\newtheorem*{exmp*}{Example}
