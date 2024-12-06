@@ -1,16 +1,14 @@
-alias e := edit
-alias r := run
-alias d := develop
-alias b := build
-alias t := test
+jd := justfile_directory()
 
-default: develop
+# list recipes
+default:
+    @just --list
 
 test:
-    zig build test
+    nix develop --command bash -c "zig build test"
 
 run:
-    zig build run
+    nix run
 
 edit:
     nix develop --command bash -c "nvim"
@@ -19,7 +17,7 @@ develop:
     nix develop --command fish
 
 build: 
-    zig build
+    nix build
 
 clean:
     rm -rf zig-out

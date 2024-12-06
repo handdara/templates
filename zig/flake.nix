@@ -31,8 +31,8 @@
                 };
 
                 packages.default = pkgs.stdenv.mkDerivation {
-                    pname = "zoc";
-                    version = "24.0.0";
+                    pname = "z.out";
+                    version = "yy.mm.minor.micro";
                     src = ./.;
 
                     nativeBuildInputs =

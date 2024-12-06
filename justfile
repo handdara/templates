@@ -1,6 +1,8 @@
 tempd := justfile_directory()
 
-runtests: _test_r_env
+default: _test_zig
+
+runtests: _test_zig _test_tex _test_r_env _test_tex_env
 
 _test_tex:
     #!/usr/bin/env bash
@@ -33,13 +35,15 @@ _test_r_env:
     export TESTD=$testd
     just run
 
-_test_zig_env:
+_test_zig:
     #!/usr/bin/env bash
     set -euxo pipefail
     testd=$(mktemp -d)
     cd $testd
     nix flake init -t {{tempd}}#zig
     export TESTD=$testd
+    just build
+    just test
     just run
 
 edit:
