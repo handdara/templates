@@ -12,3 +12,8 @@ personal use nix flake templates
     ```bash
     nix flake init -t github:handdara/templates#R
     ```
+-   `zig`
+    init command:
+    ```bash
+    nix flake init -t github:handdara/templates#zig
+    ```

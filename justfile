@@ -33,5 +33,14 @@ _test_r_env:
     export TESTD=$testd
     just run
 
+_test_zig_env:
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    testd=$(mktemp -d)
+    cd $testd
+    nix flake init -t {{tempd}}#zig
+    export TESTD=$testd
+    just run
+
 edit:
     nvim

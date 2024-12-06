@@ -10,6 +10,10 @@
                 path = ./r;
                 description = "simple flake template for R";
             };
+            zig = {
+                path = ./zig;
+                description = "simple flake template for zig";
+            };
         };
     };
 }
