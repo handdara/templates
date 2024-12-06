@@ -14,6 +14,10 @@
                 path = ./zig;
                 description = "simple flake template for zig";
             };
+            python = {
+                path = ./python;
+                description = "simple flake template for python";
+            };
         };
     };
 }
