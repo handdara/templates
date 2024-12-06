@@ -1,0 +1,27 @@
+# aoc24, zig
+
+- [ ] day 1 solution
+- [ ] day 2 solution
+- [ ] day 3 solution
+- [ ] day 4 solution
+- [ ] day 5 solution
+- [ ] day 6 solution
+- [ ] day 7 solution
+- [ ] day 8 solution
+- [ ] day 9 solution
+- [ ] day 10 solution
+- [ ] day 11 solution
+- [ ] day 12 solution
+- [ ] day 13 solution
+- [ ] day 14 solution
+- [ ] day 15 solution
+- [ ] day 16 solution
+- [ ] day 17 solution
+- [ ] day 18 solution
+- [ ] day 19 solution
+- [ ] day 20 solution
+- [ ] day 21 solution
+- [ ] day 22 solution
+- [ ] day 23 solution
+- [ ] day 24 solution
+- [ ] day 25 solution

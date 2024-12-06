@@ -1,0 +1,26 @@
+alias e := edit
+alias r := run
+alias d := develop
+alias b := build
+alias t := test
+
+default: develop
+
+test:
+    zig build test
+
+run:
+    zig build run
+
+edit:
+    nix develop --command bash -c "nvim"
+
+develop:
+    nix develop --command fish
+
+build: 
+    zig build
+
+clean:
+    rm -rf zig-out
+    rm -rf .zig-cache
