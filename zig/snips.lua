@@ -1,6 +1,7 @@
 ---@diagnostic disable: unused-local
+require('luasnip.session.snippet_collection').clear_snippets "all"
 require 'handdara.snippets.all'
-local ls = require 'luasnip'
+-- local ls = require 'luasnip'
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -19,7 +20,7 @@ local function use(snip)
     table.insert(S, snip)
 end
 
-use(s({ trig = 'example', snippetType = 'autosnippet', wordTrig = false }, c(1, { t "this will auto complete", t 'example' })))
+use(s({ trig = 'example', snippetType = 'autosnippet', wordTrig = false },
+    c(1, { t "this will auto complete", t 'example' })))
 
-ls.add_snippets("all", S)
-
+ls.add_snippets("all", S, { key = "session" })
