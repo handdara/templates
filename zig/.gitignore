@@ -4,3 +4,6 @@ zig-*
 
 # Nix
 result*
+
+# Misc
+.direnv

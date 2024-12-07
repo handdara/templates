@@ -42,9 +42,7 @@ _test_zig:
     cd $testd
     nix flake init -t {{tempd}}#zig
     export TESTD=$testd
-    just build
-    just test
-    just run
+    just
 
 edit:
     nvim
