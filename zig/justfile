@@ -1,11 +1,13 @@
+exe-name := 'z.out'
+
 default: build test-cli
     nix run
 
 test-cli:
-    ./result/bin/zft --help
-    ./result/bin/zft -n 8
-    ./result/bin/zft --number 64
-    ./result/bin/zft --number 64 -s string_cheese
+    ./result/bin/{{exe-name}} --help
+    ./result/bin/{{exe-name}} -n 8
+    ./result/bin/{{exe-name}} --number 64
+    ./result/bin/{{exe-name}} --number 64 -s string_cheese
 
 # open editor in a dev shell
 edit:

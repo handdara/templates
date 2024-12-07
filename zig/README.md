@@ -3,6 +3,7 @@
 need to change the name of the binary in:
 -   `flake.nix` under `pname` in the output derivation
 -   `build.zig` in the `exe` definition
+-   `exe-name` in the `justfile`
 
 also a good idea to change the package name in `build.zig.zon`.
 
