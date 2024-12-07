@@ -1,18 +1,12 @@
 {
-    description = "Advent of Code 2024 in Zig";
+    description = "basic zig project template";
 
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
         flake-utils.url = "github:numtide/flake-utils";
-        zig-flags.url = "github:n0s4/flags";
-        zig-flags.flake = false;
     };
 
-    outputs = {
-        nixpkgs,
-        flake-utils,
-        ...
-        }@inputs:
+    outputs = { nixpkgs, flake-utils, ... }:
         flake-utils.lib.eachDefaultSystem (
             system: let
                 pkgs = nixpkgs.legacyPackages.${system};
@@ -22,12 +16,9 @@
                 ];
 
                 buildInputs = [];
-                
-                # ENVS
-                ZIG_FLAGS = inputs.zig-flags + /src;
             in {
                 devShells.default = pkgs.mkShell {
-                    inherit nativeBuildInputs buildInputs ZIG_FLAGS;
+                    inherit nativeBuildInputs buildInputs;
                 };
 
                 packages.default = pkgs.stdenv.mkDerivation {
@@ -40,7 +31,7 @@
                         ++ [
                             pkgs.zig.hook
                         ];
-                    inherit buildInputs ZIG_FLAGS;
+                    inherit buildInputs;
 
                     doCheck = true;
                 };

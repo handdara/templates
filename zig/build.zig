@@ -11,9 +11,6 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    const zig_flags = std.posix.getenv("ZIG_FLAGS") orelse std.debug.panic("ZIG_FLAGS not set", .{});
-    exe.addIncludePath(std.Build.LazyPath{ .cwd_relative = zig_flags });
-
     b.installArtifact(exe);
 
     // run step

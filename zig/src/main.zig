@@ -1,5 +1,4 @@
 const std = @import("std");
-const flags = @import("flags");
 
 pub fn main() !void {
     // Prints to stderr (it's a shortcut based on `std.io.getStdErr()`)
@@ -12,10 +11,17 @@ pub fn main() !void {
     var bw = std.io.bufferedWriter(stdout_file);
     const stdout = bw.writer();
 
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer _ = gpa.deinit();
+
     try stdout.print("Run `zig build test` to run the tests.\n", .{});
 
     try bw.flush(); // don't forget to flush!
 }
+
+const Flags = struct {
+    flag: bool,
+};
 
 test "simple test" {
     var list = std.ArrayList(i32).init(std.testing.allocator);
