@@ -2,6 +2,7 @@ jd := justfile_directory()
 pdf_name := "output.pdf"
 pdf_result := jd / "result/built.pdf"
 pdf_out := jd / pdf_name
+view_pdf_cmd := "zathura"
 
 # list recipes
 default:
@@ -18,8 +19,9 @@ build:
     cp -f {{pdf_result}} {{pdf_out}}
 
 # open built pdf
-open-pdf:
-    nix develop --command bash -c "okular {{pdf_out}}"
+@open-pdf:
+    # nix develop --command bash -c "okular {{pdf_out}}"
+    {{view_pdf_cmd}} "{{pdf_out}}"
 
 # drop into dev shell and launch neovim
 edit:
