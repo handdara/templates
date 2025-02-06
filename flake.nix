@@ -20,7 +20,7 @@
             };
             runapp = {
                 path = ./runapp;
-                description = "simple flake template for python";
+                description = "Simple app runner for testing stuff pre-installation";
             };
         };
     };
