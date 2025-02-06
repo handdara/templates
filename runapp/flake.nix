@@ -8,9 +8,7 @@
             pkgs = nixpkgs.legacyPackages.${system};
             appToRun = pkgs.ncspot;
         in {
-            devShells.default = pkgs.mkShell {
-                nativeBuildInputs = [ appToRun ];
-                buildInputs = [];
-            };
+            devShells.default = pkgs.mkShell { nativeBuildInputs = [ appToRun ]; };
+            packages.default = appToRun;
         });
 }
