@@ -18,6 +18,10 @@
                 path = ./python;
                 description = "simple flake template for python";
             };
+            runapp = {
+                path = ./runapp;
+                description = "simple flake template for python";
+            };
         };
     };
 }

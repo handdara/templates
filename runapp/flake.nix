@@ -1,5 +1,5 @@
 {
-    description = "Simple app runner for testing stuff pre-installation.";
+    description = "Simple app runner for testing stuff pre-installation";
     inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     inputs.flake-utils.url = "github:numtide/flake-utils";
 
