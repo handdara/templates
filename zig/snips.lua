@@ -1,3 +1,5 @@
+-- run the command `:%lua` to load snippets
+
 ---@diagnostic disable: unused-local
 require('luasnip.session.snippet_collection').clear_snippets "all"
 require 'handdara.snippets.all'

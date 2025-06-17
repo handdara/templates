@@ -1,3 +1,5 @@
+-- run the command `:%lua` to load snippets
+
 ---@diagnostic disable: unused-local
 local ls = require 'luasnip'
 local s = ls.snippet
