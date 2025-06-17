@@ -22,6 +22,10 @@
                 path = ./runapp;
                 description = "Simple app runner for testing stuff pre-installation";
             };
+            fortran = {
+                path = ./fortran;
+                description = "simple flake template for FORTRAN";
+            };
         };
     };
 }

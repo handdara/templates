@@ -1,0 +1,20 @@
+jd := justfile_directory()
+
+# list recipes
+default:
+    @just --list
+
+# drop into dev shell
+develop:
+    nix develop
+
+build:
+    nix build
+
+# run main.f90
+run:
+    nix develop --command bash -c "Rscript main.R"
+
+# drop into dev shell and launch neovim
+edit:
+    nix develop --command bash -c "nvim"
