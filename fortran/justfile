@@ -1,3 +1,5 @@
+alias d := develop
+alias r := run
 jd := justfile_directory()
 
 # list recipes
@@ -6,15 +8,10 @@ default:
 
 # drop into dev shell
 develop:
-    nix develop
+    nix develop --command ghostty
 
 build:
     nix build
 
-# run main.f90
 run:
-    nix develop --command bash -c "Rscript main.R"
-
-# drop into dev shell and launch neovim
-edit:
-    nix develop --command bash -c "nvim"
+    nix run

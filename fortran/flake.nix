@@ -11,29 +11,18 @@
         flake-utils.lib.eachDefaultSystem (system: let
             pkgs = nixpkgs.legacyPackages.${system};
             nativeBuildInputs = with pkgs; [
-                fortran-language-server
+                fortls
+                alejandra
                 just
             ];
-            buildInputs = with pkgs; [                
+            buildInputs = with pkgs; [
                 gfortran
             ];
-            main = "main";
+            fortranStd = "f2018";
         in {
             devShells.default = pkgs.mkShell {
                 inherit nativeBuildInputs buildInputs;
             };
-            packages.default = pkgs.stdenv.mkDerivation rec {
-                pname = "f.out";
-                version = "25.06.0.0";
-                src = ./.;
-                inherit buildInputs nativeBuildInputs;
-                buildPhase = ''
-                  ${pkgs.gfortran}/bin/gfortran ${main}.f90 -o ${pname}
-                '';
-                installPhase = ''
-                  mkdir -p $out/bin
-                  cp ${pname} $out/bin/${pname}
-                '';
-            };
+            packages.default = pkgs.callPackage ./main.nix {inherit fortranStd;};
         });
 }
