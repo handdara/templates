@@ -1,3 +1,4 @@
+alias b := dev-build
 alias d := develop
 alias r := run
 jd := justfile_directory()
@@ -15,3 +16,7 @@ build:
 
 run:
     nix run
+
+dev-build:
+    alejandra .
+    nix build

@@ -23,6 +23,6 @@
             devShells.default = pkgs.mkShell {
                 inherit nativeBuildInputs buildInputs;
             };
-            packages.default = pkgs.callPackage ./main.nix {inherit fortranStd;};
+            packages.default = pkgs.callPackage ./app.nix {inherit fortranStd;};
         });
 }

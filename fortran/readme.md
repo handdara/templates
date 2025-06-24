@@ -1,3 +1,3 @@
-# handdara FORTRAN template
+# Fortran example project
 
-Simple FORTRAN template.
+Simple FORTRAN example project.
